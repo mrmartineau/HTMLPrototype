@@ -1,6 +1,10 @@
-<?php include_once "includes/_html_start.php" ?>
+<?php
+	$title = "HTML Prototype";
+	$id = "home";
+	include_once 'includes/_html_start.php';
+?>
 <!-- !Body -->
-<body id="sect_home">
+<body id="sect_<?php echo $id; ?>">
 	<div id="container">
 		<?php include_once "includes/_masthead.php" ?>
 
