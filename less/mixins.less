@@ -1,0 +1,299 @@
+/*==========================================*/
+/*=== MIXINS.less ===*/
+/*=== TABLE OF CONTENTS ===*/
+/*==========================================
+:: GRID CALCULATIONS
+:: CSS3
+:: CLEARFIX
+:: FONT-STACKS
+:: COLOURS / OPACITY ETC
+:: RESET
+==========================================--*/
+/*==========================================*/
+/*=== GRID CALCULATIONS ===*/
+/*==========================================*/
+.columns(@columnSpan: 1) {
+	width: (@gridColumnWidth * @columnSpan) + (@gridGutterWidth * (@columnSpan - 1));
+}
+.offset(@columnOffset: 1) {
+	margin-left: (@gridColumnWidth * @columnOffset) + (@gridGutterWidth * (@columnOffset - 1)) + @gridGutterWidth + (@gridGutterWidth/2);
+}
+.push(@pushOffset: 1) {
+	left: (@gridColumnWidth * @pushOffset) + (@gridGutterWidth * (@pushOffset - 1) + @gridGutterWidth);
+}
+.pull(@pullOffset: 1) {
+	right: (@gridColumnWidth * @pullOffset) + (@gridGutterWidth * (@pullOffset - 1) + @gridGutterWidth);
+}
+/*==========================================*/
+/*=== CSS3 ===*/
+/*==========================================*/
+/*=== Border Radius ===*/
+.border-radius(@radius: 5px) {
+-webkit-border-radius: @radius;
+   -moz-border-radius: @radius;
+	 -o-border-radius: @radius;
+		border-radius: @radius;
+}
+/*=== Drop shadows ===*/
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+-webkit-box-shadow: @shadow;
+   -moz-box-shadow: @shadow;
+	 -o-box-shadow: @shadow;
+		box-shadow: @shadow;
+}
+/*=== Transitions ===*/
+.transition(@transition) {
+-webkit-transition: @transition;
+   -moz-transition: @transition;
+	 -o-transition: @transition;
+		transition: @transition;
+}
+/*=== CSS3 Content Columns ===*/
+.content-columns(@columnCount, @columnGap: 20px) {
+-webkit-column-count: @columnCount;
+-webkit-column-gap:   @columnGap;
+   -moz-column-count: @columnCount;
+   -moz-column-gap:   @columnGap;
+		column-count: @columnCount;
+		column-gap:   @columnGap;
+}
+/*=== Background clipping ===*/
+.background-clip(@clip) {
+  -webkit-background-clip: @clip;
+	 -moz-background-clip: @clip;
+		  background-clip: @clip;
+}
+/*=== Opacity ===*/
+.opacity(@opacity: 100) {
+		filter: e(%("alpha(opacity=%d)", @opacity));
+ -khtml-opacity: @opacity / 100;
+   -moz-opacity: @opacity / 100;
+		opacity: @opacity / 100;
+}
+/*=== Transitions ===*/
+.transition(@transition) {
+-webkit-transition: @transition;
+   -moz-transition: @transition;
+	 -o-transition: @transition;
+		transition: @transition;
+}
+/*=== Transforms ===*/
+.transform(@transform: scale(1.2)) {
+-webkit-transform: @transform;
+   -moz-transform: @transform;
+	 -o-transform: @transform;
+		transform: @transform;
+}
+.scale(@factor: 1.2) {
+-webkit-transform: scale(@factor);
+   -moz-transform: scale(@factor);
+	-ms-transform: scale(@factor);
+	 -o-transform: scale(@factor);
+		transform: scale(@factor);
+}
+.rotate(@deg) {
+-webkit-transform: rotate(@deg);
+   -moz-transform: rotate(@deg);
+	-ms-transform: rotate(@deg);
+	 -o-transform: rotate(@deg);
+		transform: rotate(@deg);
+}
+.skew(@deg, @deg2) {
+-webkit-transform: skew(@deg, @deg2);
+   -moz-transform: skew(@deg, @deg2);
+	-ms-transform: skew(@deg, @deg2);
+	 -o-transform: skew(@deg, @deg2);
+		transform: skew(@deg, @deg2);
+}
+.translate(@x, @y:0) {
+-webkit-transform: translate(@x, @y);
+   -moz-transform: translate(@x, @y);
+	-ms-transform: translate(@x, @y);
+	 -o-transform: translate(@x, @y);
+		transform: translate(@x, @y);
+}
+.translate3d(@x, @y: 0, @z: 0) {
+-webkit-transform: translate3d(@x, @y, @z);
+   -moz-transform: translate3d(@x, @y, @z);
+	-ms-transform: translate3d(@x, @y, @z);
+	 -o-transform: translate3d(@x, @y, @z);
+		transform: translate3d(@x, @y, @z);
+}
+.perspective(@value: 1000) {
+-webkit-perspective: @value;
+   -moz-perspective: @value;
+	-ms-perspective: @value;
+		perspective: @value;
+}
+.transform-origin(@x:center, @y:center) {
+-webkit-transform-origin: @x @y;
+   -moz-transform-origin: @x @y;
+	-ms-transform-origin: @x @y;
+	 -o-transform-origin: @x @y;
+		transform-origin: @x @y;
+}
+
+/*== Animation ===*/
+.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
+-webkit-animation: @name @duration @delay @ease;
+   -moz-animation: @name @duration @delay @ease;
+	-ms-animation: @name @duration @delay @ease;
+		animation: @name @duration @delay @ease;
+}
+
+/*=== Add an alphatransparency value to any background or border color (via Elyse Holladay) ===*/
+#translucent {
+	.background(@color: @white, @alpha: 1) {
+		background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+	}
+	.border(@color: @white, @alpha: 1) {
+		border-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+		background-clip: padding-box;
+	}
+}
+
+
+
+
+
+/*==========================================*/
+/*=== VARIOUS MIXINS ===*/
+/*==========================================*/
+
+/*=== CLEARFIX ===*/
+.group() {
+	zoom: 1;
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+		zoom: 1;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+/*=== Center-align a block level element ===*/
+.center_block() {
+	display: block;
+	margin: 0 auto;
+}
+
+/*=== Sizing shortcuts ===*/
+.size(@height: 5px, @width: 5px) {
+	height: @height;
+	width: @width;
+}
+.square(@size: 5px) {
+	.size(@size, @size);
+}
+
+/*=== Input placeholder text ===*/
+.placeholder(@color: @grayLight) {
+	:-moz-placeholder {
+		color: @color;
+	}
+	::-webkit-input-placeholder {
+		color: @color;
+	}
+}
+
+// Make any element resizable for prototyping
+.resizable(@direction: both) {
+		resize: @direction; // Options are horizontal, vertical, both
+		overflow: auto; // Safari fix
+}
+
+.gridColumn() {
+	display: inline;
+	float: left;
+	margin-left: @gridGutterWidth;
+}
+
+
+/*=== Based on Eric Meyers' reset 2.0 - http://meyerweb.com/eric/tools/css/reset/index.html ===*/
+/*=== & the Compass Reset utility - http://compass-style.org/reference/compass/reset/utilities/ ===*/
+#reset {
+	.global-reset {
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			#reset > .reset-box-model;
+			#reset > .reset-font;
+		}
+		body {
+			#reset > .reset-body;
+		}
+		ol, ul {
+			#reset > .reset-list-style;
+		}
+		table {
+			#reset > .reset-table;
+		}
+		caption, th, td {
+			#reset > .reset-table-cell;
+		}
+		q, blockquote {
+			#reset > .reset-quotation;
+		}
+		a img {
+			#reset > .reset-image-anchor-border;
+		}
+		#reset > .reset-html5;
+	}
+	.reset-box-model {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+	.reset-font {
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	.reset-focus {
+		outline: 0;
+	}
+	.reset-body {
+		line-height: 1;
+	}
+	.reset-list-style {
+		list-style: none;
+	}
+	.reset-table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	.reset-table-cell {
+		text-align: left;
+		font-weight: normal;
+		vertical-align: middle;
+	}
+	.reset-quotation {
+		quotes: none;
+		&:before, &:after {
+			content: "";
+			content: none;
+		}
+	}
+	.reset-image-anchor-border {
+		border: none;
+	}
+	.reset-html5 {
+		article, aside, details, figcaption, figure,
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+	}
+}
